@@ -1,17 +1,15 @@
-cd ../
-
 python -u main.py \
 --test \
---sequence_length 10 \
---prediction_length 5 \
+--sequence_length "$3" \
+--prediction_length "$4" \
 --delta_rb 30 \
 --delta_cog 30 \
 --maxVessels 15 \
 --param_domain 3.0 \
 --eval_batch_size 1 \
---model_type spatial_vlstm \
---hidden_size 128 \
+--model_type "$1" \
+--hidden_size "$2" \
 --gpuid 0 \
---dataset_directory sample_dataset/ \
+--dataset_directory dataset/ \
 --net_dir models/ \
---criterion ADE
+--criterion "$5" 

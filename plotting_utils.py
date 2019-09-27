@@ -19,6 +19,7 @@ import os
 deg2rad = math.pi/180
 radius_earth = 3440.1
 
+# function returns basemap 
 def initialize_plot_env(urcrnrlat, llcrnrlat, llcrnrlon, urcrnrlon):
 	m = Basemap(projection="cyl",area_thresh=.1,urcrnrlat=urcrnrlat,llcrnrlat=llcrnrlat,llcrnrlon=llcrnrlon,urcrnrlon=urcrnrlon)
 	parallels = [llcrnrlat,urcrnrlat]
@@ -27,9 +28,11 @@ def initialize_plot_env(urcrnrlat, llcrnrlat, llcrnrlon, urcrnrlon):
 	m.drawmeridians(meridians,labels=[True,False,False,False])
 	return m
 
+# function to convert a torch tensor to numpy
 def convert_tensor_to_numpy(tensor_):
 	return np.array(tensor_.clone().detach().cpu().numpy())
 
+# plot hardwired attentions for  a frame
 def plot_hardwired_attention(sequence, mask, dist_matrix, rb_matrix, vessel_domain, plot_dir, v_id=None):
 	if not os.path.isdir(plot_dir):
 		os.makedirs(plot_dir)
@@ -63,6 +66,7 @@ def plot_hardwired_attention(sequence, mask, dist_matrix, rb_matrix, vessel_doma
 	ax.title("hardwired attention weights")
 	plt.savefig(plot_dir+'attention/hardwired_attention/'+str(v_id)+'.png')
 
+# plot temporal attention for a frame
 def plot_soft_attention(sequence, target, prediction, plot_dir, soft_attention):
 	if not os.path.isdir(plot_dir):
 		os.makedirs(plot_dir)
@@ -99,6 +103,7 @@ def plot_soft_attention(sequence, target, prediction, plot_dir, soft_attention):
 	line3 = ax.plot(x2, y2, 'b--', 'prediction')
 	plt.savefig(plot_dir+'soft_attention/soft_attn.png')
 
+# plot trajectory of a vessel in frame
 def plot_vessel(sequence, target, prediction, plot_dir, infer=False):
 	if not os.path.isdir(plot_dir):
 		os.makedirs(plot_dir)
@@ -129,6 +134,7 @@ def plot_vessel(sequence, target, prediction, plot_dir, infer=False):
 	else:
 		plt.savefig(plot_dir+'predictions/predicted_trajectory.png')
 
+# plot trajectories for all vessels in a frame/batch 
 def plot_batch(sequence, target, prediction, plot_dir, loss, model_type, infer=False):
 	if not os.path.isdir(plot_dir):
 		os.makedirs(plot_dir)
@@ -182,11 +188,13 @@ def plot_batch(sequence, target, prediction, plot_dir, loss, model_type, infer=F
 	num_pred = len(glob.glob(plot_dir+'*.png'))
 	plt.savefig(plot_dir+str(num_pred+1)+'.png')
 
+# function to smoothen obtained domain
 def smooth(y, box_pts):
     box = np.ones(box_pts)/box_pts
     y_smooth = np.convolve(y, box, mode='same')
     return y_smooth
 
+# function to plot model-learned domain
 def plot_domain(r,delta_rb,sequence_length,prediction_length,delta_cog,max_dist,plot_dir,model,domain_param,save_new=False,approx=False):
 	if not os.path.isdir(plot_dir):
 		os.makedirs(plot_dir)
@@ -242,6 +250,7 @@ def plot_domain(r,delta_rb,sequence_length,prediction_length,delta_cog,max_dist,
 	plt.close()
 
 
+# function to plot train, valid errors during training 
 class Plotter(object):
 	def __init__(self,plotfile,train=True,valid=True):
 		if train:

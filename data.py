@@ -34,8 +34,6 @@ class dataset(Dataset):
 		self.feature_size=args.feature_size
 		self.output_size=args.output_size
 		self.idx=0
-		#self.shift=1
-		#self.shift=int(self.sequence_length/2)
 		self.shift=int(self.sequence_length+self.prediction_length)
 		for f,filename in enumerate(filenames):
 			df=self.load_data(filename)
@@ -109,45 +107,12 @@ class dataset(Dataset):
 				vesselTraj=vesselTraj[:,2:]
 			sequence[v,:]=torch.from_numpy(vesselTraj[:,:self.feature_size].astype('float32'))
 			mask[v,:]=torch.from_numpy(maskVessel.astype('float32'))
-		dist_matrix,rb_matrix,cog_matrix=get_feature_matrices(sequence[:,:self.sequence_length],self.delta_rb,self.delta_cog,0)
-		self.update_combinations_dict(rb_matrix,cog_matrix)
-		invalid = 0
-		for key, value in self.combinations.items():
-			if value > 5000 and not key=='tensor([[0., 0.]])' and invalid==0:
-				invalid=1
-				break
-		if invalid==1:
-			self.remove_combination(rb_matrix,cog_matrix)
-			return None,None,None
-		else:
-			minval = self.minval[f]
-			maxval = self.maxval[f]
-			for ftr in range(sequence.size(-1)):
-				sequence[...,ftr].clamp_(min=minval[...,ftr],max=maxval[...,ftr])
-			for key in sorted(self.combinations.keys()):
-				print(key, ":: ", self.combinations[key]) 
-			#print(self.combinations)
-			print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-			return sequence,mask,len(frameVessels)
 	def normalize_data(self,seq,maxval,minval):
 		eps=1e-12
 		seq=seq-minval
 		seq=seq+eps
 		seq=seq/(maxval-minval+eps)
 		return seq
-	def update_combinations_dict(self,rb_matrix,cog_matrix):
-		combinations = torch.stack((rb_matrix.contiguous().view(-1),cog_matrix.contiguous().view(-1)))
-		combinations=torch.unique(combinations,dim=1).transpose(0,1).view(-1,2)
-		for row in combinations.chunk(combinations.size(0),dim=0):
-			if not str(row) in list(self.combinations.keys()):
-				self.combinations[str(row)]=1
-			else:
-				self.combinations[str(row)]+=1
-	def remove_combination(self,rb_matrix,cog_matrix):
-		combinations = torch.stack((rb_matrix.contiguous().view(-1),cog_matrix.contiguous().view(-1)))
-		combinations=torch.unique(combinations,dim=1).transpose(0,1).view(-1,2)
-		for row in combinations.chunk(combinations.size(0),dim=0):
-			self.combinations[str(row)]-=1
 	def __getitem__(self,idx):
 		if not isinstance(idx,int):
 			idx=int(idx.numpy())

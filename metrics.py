@@ -14,6 +14,7 @@ from termcolor import colored
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 seed_everything()
 
+# mean of square of error
 class MSE(nn.Module):
 	def __init__(self):
 		super(MSE,self).__init__()
@@ -21,6 +22,7 @@ class MSE(nn.Module):
 	def forward(self,pred,targets):
 		return self.loss_criterion(pred,targets)
 
+# MSE on displacement error calculated in km
 class ADE(nn.Module):
 	def __init__(self):
 		super(ADE,self).__init__()
@@ -56,6 +58,7 @@ class rootADE(nn.Module):
 	def forward(self,pred,targets):
 		return torch.sqrt(self.ade(pred,targets))
 
+# final displacement error calculated in km
 class FDE(nn.Module):
 	def __init__(self):
 		super(FDE,self).__init__()

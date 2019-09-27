@@ -48,6 +48,7 @@ class progressbar(object):
 		self.output.write('\r {}'.format(bar))
 		sys.stdout.flush()
 
+# function for transferring trained weights for transfer learning 
 def transfer_weights(transfer_net,net):
 	params1 = dict(transfer_net.named_parameters())
 	dict_params = dict(net.named_parameters())
@@ -55,23 +56,7 @@ def transfer_weights(transfer_net,net):
 		if name in params1.keys():
 			dict_params[name].data.copy_(params1[name])
  
-def get_haversine_distance(lat1,lon1,lat2,lon2):
-	dlat = abs(lat1-lat2)
-	dlon = abs(lon1-lon2)
-	al = torch.sin(dlat/2)**2+torch.cos(lat1)*torch.cos(lat2)*(torch.sin(dlon/2)**2)
-	d=torch.atan2(torch.sqrt(al),torch.sqrt(1-al))
-	d*=(2*6371)
-	return d
-
-def get_absolute_bearing(lat,lon):
-	x = radius_earth*torch.cos(lat)*torch.cos(lon)
-	y = radius_earth*torch.cos(lat)*torch.cos(lon)
-	return torch.atan2(y,x)*(180/math.pi)
-
-def get_relative_bearing(heading,lat,lon):
-	abs_bearing = get_absolute_bearing(lat,lon)
-	return heading-abs_bearing
-	
+# get distance, relative_bearing, heading_matrix from sample
 def get_feature_matrices(sample,delta_rb,delta_cog,neighbors_dim=0):
 	if not (neighbors_dim==1):
 		sample=sample.transpose(0,1)
@@ -112,17 +97,21 @@ def get_feature_matrices(sample,delta_rb,delta_cog,neighbors_dim=0):
 		dist, bearing, cog_matrix = dist.transpose(0,1),bearing.transpose(0,1),cog_matrix.transpose(0,1)
 	return dist, bearing, cog_matrix
 
+# function to convert a torch tensor to numpy array
 def convert_tensor_to_numpy(tensor_):
 	return np.array(tensor_.clone().detach().cpu().numpy())
 
+# custom function to initialize domain parameter
 def varied_normal_init(tensor, a=2.0, b=1.0, std=1.0):
 	nn.init.normal_(tensor[:int(0.5*tensor.size(0))], a, std)
 	nn.init.normal_(tensor[int(0.5*tensor.size(0)):], b, std)
 
+# custom function to initialize domain parameter
 def varied_constant_init(tensor, a=3.0, b=2.0):
 	nn.init.constant_(tensor[:int(0.5*tensor.size(0))], a)
 	nn.init.constant_(tensor[int(0.5*tensor.size(0)):], b)
 
+# un-normalize a normalized tensor based on maximum and minimum values
 def unnormalize(seq,maxval,minval):
 	device=seq.get_device()
 	numftr=seq.size(-1)
@@ -132,6 +121,7 @@ def unnormalize(seq,maxval,minval):
 	seq_+=minval
 	return seq_
 
+# update best loss value in loss file
 def log_loss_value(loss,args):
 	df = pd.read_csv('loss.csv',header=0)
 	if df.empty or df.loc[((df['sequence length']==args.sequence_length) & (df['prediction length']==args.prediction_length))].empty:
@@ -154,9 +144,11 @@ def log_loss_value(loss,args):
 			df = df.append(df_current,ignore_index=True)
 			df.to_csv('loss.csv',index=False)
 
+# function returns number of trainable parameters in model
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
+# custom domain parameter intialization in an eclipse-like shape
 def domain_initialization(domain,delta_rb,delta_cog,param_domain):
 	with torch.no_grad():
 		domain[:,:int(int(360/delta_rb)/2)].data.copy_(domain[:,:int(int(360/delta_rb)/2)].uniform_(param_domain).sort(descending=True)[0])
