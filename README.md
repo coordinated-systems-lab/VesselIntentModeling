@@ -4,19 +4,19 @@ Ships, or vessels, often sail in and out of cluttered environments over the cour
 
 For three agents in a frame as shown below, the trajectory of the <em> red </red?> agent is influenced by that of the other two. The spatial attention mechanism hence weighs the hidden states of these neighbors based on their influence and uses the weighted sum at the next time step. 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_influence.png width="400" height = "400">
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_influence.png width="400" height = "300">
 
 ## Spatial Attention Mechanism
 
 To model the spatial influence of neighbors on a vessel of interest and incorporate the influence on the vessel's trajectory, we introduce a <em> spatial attention mechanism </em>. 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attention_mechanism.png width="400" height = "400">
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attention_mechanism.png width="400" height = "300">
 
 ## Temporal Attention Mechanism
 
 In the decoder, we also interleave a <em> temporal attention mechanism </em> with the spatial attention mechanism, to enable the model to inform prediction using previously observed spatial situations. 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/decoder_method.png width="400" height="400"> 
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/decoder_method.png width="400" height="300"> 
 
 ## Spatial Influence
 
@@ -24,11 +24,11 @@ We define a trainable parameter, called <em>domain</em> in our spatial attention
 
 On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our model infers the <em>ship domain </em> as: 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/domain.png width="400" height="400">
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/domain.png width="400" height="300">
 
 Below is an example of the spatial influence computed by our model for 2 nearly similar scenarios. The size of the blue circle is directly proportional to the model inferred spatial influence of that vessel on the neighbor. 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_1.gif width="400", height="400"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_2.gif width="400", height="400"> 
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_1.gif width="400"  height="300"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_2.gif width="400" height="300"> 
 
 ## Implementation Details
 
