@@ -4,7 +4,7 @@ Ships, or vessels, often sail in and out of cluttered environments over the cour
 
 For three agents in a frame as shown below, the trajectory of the <em> red </red?> agent is influenced by that of the other two. The spatial attention mechanism hence weighs the hidden states of these neighbors based on their influence and uses the weighted sum at the next time step. 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_influence.png>
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_influence.png width="400" height = "300">
 
 ## Spatial Attention Mechanism
 
