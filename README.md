@@ -26,7 +26,7 @@ In the decoder, we also interleave a <em> temporal attention mechanism </em> wit
 
 ## Spatial Influence
 
-We define a trainable parameter, called <em>domain</em> in our spatial attention mechanism. For an agent attempting to navigate safely in a crowded environment, the agent’s domain can be defined as the safe space surrounding the agent, the intrusion of which by any neighboring agent would cause both to have a direct impact on each other’s future intent. 
+We define a trainable parameter, called <em> domain </em> in our spatial attention mechanism. For an agent attempting to navigate safely in a crowded environment, the agent’s domain can be defined as the safe space surrounding the agent, the intrusion of which by any neighboring agent would cause both to have a direct impact on each other’s future intent. 
 
 On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our model infers the <em>ship domain </em> as: 
 
