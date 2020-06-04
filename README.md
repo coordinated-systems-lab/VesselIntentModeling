@@ -1,3 +1,8 @@
+# A Spatially and Temporally Attentive Joint Trajectory Prediction Framework for Modeling Vessel Intent
+
+Ships, or vessels, often sail in and out of cluttered environments over the course of their trajectories. Safe navigation in such cluttered scenarios requires an accurate estimation of the intent of neighboring vessels and their effect on the self and vice-versa well into the future. We propose a spatially and temporally attentive LSTM-based encoder-decoder model that is able to predict future trajectories <em>jointly</em> for all ships in the frame. 
+
+
 ## Step 1: Download Data
 
 To download data run:
