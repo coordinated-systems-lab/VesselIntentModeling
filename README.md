@@ -21,7 +21,7 @@ To model the spatial influence of neighbors on a vessel of interest and incorpor
 In the decoder, we also interleave a <em> temporal attention mechanism </em> with the spatial attention mechanism, to enable the model to inform prediction using previously observed spatial situations. 
 
 <p align="center">
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/decoder_method.png width="400" height="300"> 
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/decoder_method.png width="450" height="300"> 
 </p>
 
 ## Spatial Influence
