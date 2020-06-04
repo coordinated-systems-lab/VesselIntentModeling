@@ -2,7 +2,7 @@
 
 Ships, or vessels, often sail in and out of cluttered environments over the course of their trajectories. Safe navigation in such cluttered scenarios requires an accurate estimation of the intent of neighboring vessels and their effect on the self and vice-versa well into the future. We propose a spatially and temporally attentive LSTM-based encoder-decoder model that is able to predict future trajectories <em>jointly</em> for all ships in the frame. 
 
-For three agents in a frame as shown below, the trajectory of the <em> red </red?> agent is influenced by that of the other two. The spatial attention mechanism hence weighs the hidden states of these neighbors based on their influence and uses the weighted sum at the next time step. 
+For three agents in a frame as shown below, the trajectory of the <em> red </em> agent is influenced by that of the other two. The spatial attention mechanism hence weighs the hidden states of these neighbors based on their influence and uses the weighted sum at the next time step. 
 
 <p align="center">
 <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_influence.png width="300" height = "300">
@@ -26,7 +26,7 @@ In the decoder, we also interleave a <em> temporal attention mechanism </em> wit
 
 ## Spatial Influence
 
-We define a trainable parameter, called <em>domain</em> in our spatial attention mechanism. For an agent attempting to navigate safely in a crowded environment, the agent’s domain can be defined as the safe space surrounding the agent, the intrusion of which by any neighboring agent would cause both to have a direct impact on each other’s future intent. 
+We define a trainable parameter, called <em> domain </em> in our spatial attention mechanism. For an agent attempting to navigate safely in a crowded environment, the agent’s domain can be defined as the safe space surrounding the agent, the intrusion of which by any neighboring agent would cause both to have a direct impact on each other’s future intent. 
 
 On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our model infers the <em>ship domain </em> as: 
 
@@ -37,7 +37,7 @@ On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our
 Below is an example of the spatial influence computed by our model for 2 nearly similar scenarios. The size of the blue circle is directly proportional to the model inferred spatial influence of that vessel on the neighbor. 
 
 <p align="center">
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_1.gif width="400"  height="300"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_2.gif width="400" height="300"> 
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/1.gif width="200"  height="500"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/2.gif width="200" height="500"> 
 </p>
 
 ## Implementation Details
