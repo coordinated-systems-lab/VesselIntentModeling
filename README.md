@@ -24,7 +24,7 @@ We define a trainable parameter, called <em>domain</em> in our spatial attention
 
 On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our model infers the <em>ship domain </em> as: 
 
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/domain.png width="400" height="600">
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/domain.png width="400" height="500">
 
 Below is an example of the spatial influence computed by our model for 2 nearly similar scenarios. The size of the blue circle is directly proportional to the model inferred spatial influence of that vessel on the neighbor. 
 
