@@ -37,7 +37,7 @@ On training on AIS Data (https://marinecadastre.gov/ais/) from January 2017, our
 Below is an example of the spatial influence computed by our model for 2 nearly similar scenarios. The size of the blue circle is directly proportional to the model inferred spatial influence of that vessel on the neighbor. 
 
 <p align="center">
-<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_1.gif width="400"  height="300"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/spatial_attn_2.gif width="400" height="300"> 
+<img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/1.gif width="400"  height="300"> <img src = https://github.com/coordinated-systems-lab/VesselIntentModeling/blob/master/img/2.gif width="400" height="300"> 
 </p>
 
 ## Implementation Details
