@@ -65,6 +65,8 @@ Every file contains data corresponding to a Zone. Each vessel is associated with
 ```bash
 python grid.py --zone=11 --grid_size=0.05 
 ```
+Note that making `grid_size` too small may remove a significant number of valid trajectories, and the default in 0.02.
+
 
 ### Step 3: Train a model 
 
