@@ -8,6 +8,8 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 import numpy as np
 import glob
+import argparse
+
 
 if not os.path.isdir('processed_data/'):
 	os.makedirs('processed_data/')
@@ -15,8 +17,13 @@ if not os.path.isdir('processed_data/'):
 files = glob.glob('raw_data/*.csv')
 files.sort()
 print(files)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--zone",type=int,help="zone")
+args=parser.parse_args()
+
 for f, filename in enumerate(files):
-	if not 'Zone11' in filename:
+	if args.zone and not 'Zone%02d'%(args.zone) in filename:
 		continue
 	print("processing data from ", str(filename))
 	out_file = filename.split("Zone")[1]
@@ -37,10 +44,10 @@ for f, filename in enumerate(files):
 			vessel_data.set_index(['BaseDateTime'],inplace=True)
 			vessel_data['Heading']=vessel_data['Heading'].astype('int32')
 			if not len(vessel_data['Heading'].unique())==1:
-				if (np.int(511) in vessel_data['Heading'].values):
+				if (int(511) in vessel_data['Heading'].values):
 					vessel_data['Heading'].replace(to_replace=511, method='ffill',inplace=True)
 					vessel_data['Heading'].replace(to_replace=511, method='bfill',inplace=True)
-				out_frame = out_frame.append(vessel_data)
+				out_frame = out_frame._append(vessel_data)
 		except ValueError:
 			print("invalid heading values found")
 	#	out_frame = out_frame.append(vessel_data)

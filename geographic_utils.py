@@ -12,8 +12,9 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 radius_earth = 3440.1
 
+# need to uncomment one of these
 #min_lat, max_lat, min_lon, max_lon = 32, 33, -118, -117 
-#min_lat, max_lat, min_lon, max_lon = 32, 35, -120, -117
+min_lat, max_lat, min_lon, max_lon = 32, 35, -120, -117
 min_lat , max_lat, min_lon, max_lon  = (math.pi/180)*min_lat, (math.pi/180)*max_lat, (math.pi/180)*min_lon, (math.pi/180)*max_lon
 
 class displacement_error(nn.Module):
