@@ -65,7 +65,7 @@ Nominally, use zone 11 here, i.e. XY should be 11.
 Every file contains data corresponding to a Zone. Each vessel is associated with its trajectory over timestamps, i.e. latitude and longitude positions and speed and heading values. Each UTM Zone spans 6&deg; of longitude and 8&deg; of latitude (approximately grid squares of 100 km). For simplicity, we (optionally) split each zone into smaller grids. For example:
 
 ```bash
-python grid.py --zone=XY --grid_size=0.05 
+python grid.py --zone=<XY> --grid_size=0.05 
 ```
 Nominally, use zone 11 here, i.e. XY should be 11.
 Note that making `grid_size` too small may remove a significant number of valid trajectories, and the default in 0.2.
