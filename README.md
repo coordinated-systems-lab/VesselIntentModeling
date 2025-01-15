@@ -74,6 +74,10 @@ Note that making `grid_size` too small may remove a significant number of valid 
 ### Step 3: Train a model 
 
 There are four models to choose from: a vanilla LSTM , a spatially attentive LSTM, a temporally attentive LSTM, a spatially and temporally attentive LSTM. 
+- `vanilla_lstm`
+- `temporal_model`
+- `spatial_model`
+- `spatial_temporal_model`
 
 To train a new model with our best hyper-parameters, run:
 
