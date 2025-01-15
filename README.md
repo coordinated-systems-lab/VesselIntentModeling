@@ -56,6 +56,9 @@ sh scripts/download_data.sh
 
 This downloads AIS Data from January 2017 from  https://marinecadastre.gov/data/ and saves it in data_processing/raw_data/. 
 
+One can easily change the dates by directly browsing the marinecadastre.gov website.
+
+
 ### Step 2: Preprocess the data
 
 The raw data contains duplicate MMSIs, missing/invalid heading values, etc. that need to be removed. Further, all the vessels transmit AIS data at different frequencies, but for feeding the data into our model, we need to resample all data to 1 minute intervals. For doing this, run:
