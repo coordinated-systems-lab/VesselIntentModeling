@@ -47,7 +47,7 @@ Below is an example of the spatial influence computed by our model for 2 nearly 
 To download data run:
 
 ```bash
-sh download_data.sh
+sh scripts/download_data.sh
 ```
 
 This downloads AIS Data from January 2017 from  https://marinecadastre.gov/data/ and saves it in data_processing/raw_data/. 
