@@ -42,9 +42,9 @@ Below is an example of the spatial influence computed by our model for 2 nearly 
 
 ## Implementation Details
 
-Package details and dependencies are included in `vessel_intent.yaml` although this is likely somewhat over-specified and only tested on two machines. 
+Package details and dependencies are included in `environment.yml` although this is likely somewhat over-specified and only tested on two machines. 
 
-After installing all dependencies...
+After installing all dependencies (this is a conda env)...
 
 ### Step 1: Download Data
 
