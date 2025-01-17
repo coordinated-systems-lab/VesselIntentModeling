@@ -7,7 +7,7 @@ import random
 import matplotlib
 matplotlib.use("agg")
 from matplotlib import pyplot as plt
-from mpl_toolkits.basemap import Basemap
+#from mpl_toolkits.basemap import Basemap
 import argparse
 from global_land_mask import globe
 from termcolor import colored

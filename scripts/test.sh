@@ -1,4 +1,4 @@
-python -u main.py --test --model "$1" --gpuid 1 \
+python -u main.py --test --model ${1:-spatial_temporal_model} --gpuid 0 \
 --hidden_size 6 \
 --feature_size 2 \
 --zone 11 \

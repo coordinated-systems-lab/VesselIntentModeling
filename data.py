@@ -173,6 +173,11 @@ def load_data(data_dir, args):
 	train_dir = dataset_dir+'train/'
 	val_dir = dataset_dir+'val/'
 	test_dir = dataset_dir+'test/'
+	if not os.path.isdir(dataset_dir):
+		os.makedirs(dataset_dir)
+		os.makedirs(train_dir)
+		os.makedirs(val_dir)
+		os.makedirs(test_dir)
 	if args.split_data or len(os.listdir(train_dir))==0:
 		data = trajectory_dataset(data_dir, args.sequence_length, args.prediction_length, args.feature_size)
 		data_size=len(data)
